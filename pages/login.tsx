@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import header from 'next/head';
+import Head from 'next/head';
 import evt from '../util/eventos';
 import Entrada from '../componentes/entrada';
 import Link from 'next/link';
@@ -51,9 +51,9 @@ class Login extends Component<any, Istate> {
 					width: '100%'
 				}}
 			>
-				<header>
+				<Head>
 					<title>Login</title>
-				</header>
+				</Head>
 
 				<div>
 					<p style={{ fontSize: '2rem', textAlign: 'center' }}>Logo</p>
@@ -89,23 +89,30 @@ class Login extends Component<any, Istate> {
 								className="round btn step1"
 								onClick={() => this.mostrar_Codigo()}
 							>
-								Enviar Codigo
+								Enviar Codigo <span className="material-icons">send</span>
 							</button>
 							<button
 								className="round btn hide step2"
 								onClick={() => this.mostrar_Codigo()}
 							>
-								{' '}
-								Ingresar{' '}
+								Ingresar
 							</button>
 						</div>
 
 						<p style={{ marginTop: '2rem' }}>
-							¿No tiene una cuenta?{' '}
+							¿No tiene una cuenta?
 							<Link href="/">
 								<a>Cree una</a>
 							</Link>
 							.
+						</p>
+						<p>
+							<Link href="/">
+								<a>
+									¿Deseas regresar al inicio?{' '}
+									<span className="material-icons">home</span>
+								</a>
+							</Link>
 						</p>
 					</div>
 				</div>
