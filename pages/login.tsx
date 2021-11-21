@@ -106,28 +106,11 @@ class Login extends Component<any, Istate> {
 							</Link>
 							.
 						</p>
-						<p>
-							<Link href="/">
-								<a>
-									¿Deseas regresar al inicio?{' '}
-									<span className="material-icons">home</span>
-								</a>
-							</Link>
-						</p>
 					</div>
 				</div>
 			</div>
 		);
 	}
-}
-
-interface props {
-	id?: string;
-	label?: string;
-	type?: string;
-	placeholder?: string;
-	value?: string;
-	onChange?: any;
 }
 
 export default Login;
