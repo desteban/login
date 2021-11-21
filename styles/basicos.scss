@@ -78,8 +78,11 @@ a {
 	color: $texto_boton;
 	background-color: $boton;
 
-	&:hover {
+	&:active {
 		transform: scale(0.9);
+	}
+
+	&:hover {
 		background-color: rgba($boton, 0.8);
 	}
 }
@@ -88,6 +91,7 @@ a {
 	background-color: $fondo_formulario;
 	padding: 1rem 2rem;
 	margin: 1rem;
+	transition: all 0.4s ease-in-out;
 }
 
 .input {
@@ -95,6 +99,7 @@ a {
 	flex-direction: column;
 	flex-wrap: wrap;
 	margin: 1rem 0px;
+	transition: all 0.4s ease-in-out;
 
 	input {
 		width: 100%;

@@ -29,5 +29,9 @@
 	.btn {
 		background-color: $dark_boton;
 		color: $dark_texto_boton;
+
+		&:hover {
+			background-color: $boton;
+		}
 	}
 }

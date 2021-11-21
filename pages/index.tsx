@@ -41,6 +41,13 @@ const Home: NextPage = () => {
 				<div className="formulario round">
 					<h3>Formulario</h3>
 
+					<p>
+						Deseas ir al{' '}
+						<Link href="/login">
+							<a>Login</a>
+						</Link>
+					</p>
+
 					<Entrada label="Entrada 1" />
 
 					<Entrada label="Entrada 1" />

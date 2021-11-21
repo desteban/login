@@ -10,6 +10,10 @@ export default class Header extends Component {
 		super(props);
 	}
 
+	componentDidMount() {
+		this.escojerTema();
+	}
+
 	toggle_menu = () => {
 		let nav = document.getElementById('listanav');
 		nav?.classList.toggle('ocultar-nav');
@@ -35,6 +39,28 @@ export default class Header extends Component {
 		if (estado) {
 			estado.tema = !estado.tema;
 			localStorage.setItem('tema', JSON.stringify(estado));
+		}
+	}
+
+	escojerTema() {
+		let tema = localStorage.getItem('tema');
+		let body = document.querySelector('body');
+		let html = document.querySelector('html');
+		let estado;
+
+		if (tema) {
+			estado = JSON.parse(tema);
+		}
+
+		if (!estado) {
+			localStorage.setItem('tema', JSON.stringify({ tema: true }));
+		}
+
+		if (estado) {
+			if (!estado.tema) {
+				body?.classList.add('dark');
+				html?.classList.add('dark');
+			}
 		}
 	}
 
