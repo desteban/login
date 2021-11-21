@@ -2,14 +2,55 @@ html,
 body {
 	padding: 0;
 	margin: 0;
-	font-size: 'M PLUS 2', sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+	font-family: 'M PLUS 2', sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
 		Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+	background-color: $fondo;
+	color: $texto;
 }
 
 @for $i from 1 to 6 {
 	h#{$i} {
 		font-family: 'Outfit', sans-serif;
+		color: $titulos;
 	}
+}
+
+h1 {
+	font-size: 3rem;
+}
+
+h2 {
+	font-size: 2rem;
+}
+
+h3 {
+	font-size: 1.9rem;
+}
+
+h4 {
+	font-size: 1.56rem;
+}
+
+h5 {
+	font-size: 1.25rem;
+}
+
+h6 {
+	font-size: 1.1rem;
+}
+
+p {
+	font-size: 1.1rem;
+	line-height: 1.5rem;
+}
+
+a {
+	color: $enlace;
+	text-decoration: none;
+}
+
+.hide {
+	display: none;
 }
 
 .click {
@@ -18,4 +59,46 @@ body {
 
 .round {
 	border-radius: 1rem;
+}
+
+.btn {
+	width: 100%;
+	padding: 10px 1rem;
+	border: none;
+	transition: all 0.4s ease-in-out;
+	color: $texto_boton;
+	background-color: $boton;
+
+	&:hover {
+		transform: scale(0.9);
+		background-color: rgba($boton, 0.8);
+	}
+}
+
+.formulario {
+	background-color: $fondo_formulario;
+	padding: 1rem 2rem;
+	margin: 1rem;
+}
+
+.input {
+	display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+	margin: 1rem 0px;
+
+	input {
+		width: 100%;
+		border-radius: 0.3rem;
+		border: none;
+		padding: 5px;
+		margin-top: 0.4rem;
+		display: inline;
+	}
+}
+
+.input-codigo {
+	input {
+		text-align: center;
+	}
 }
