@@ -6,12 +6,14 @@ body {
 		Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 	background-color: $fondo;
 	color: $texto;
+	transition: all 0.4s ease-in-out;
 }
 
 @for $i from 1 to 6 {
 	h#{$i} {
 		font-family: 'Outfit', sans-serif;
 		color: $titulos;
+		transition: all 0.4s ease-in-out;
 	}
 }
 
@@ -42,11 +44,13 @@ h6 {
 p {
 	font-size: 1.1rem;
 	line-height: 1.5rem;
+	transition: all 0.4s ease-in-out;
 }
 
 a {
-	color: $enlace;
+	color: $tercer;
 	text-decoration: none;
+	transition: all 0.4s ease-in-out;
 }
 
 .material-icons {
@@ -100,6 +104,14 @@ a {
 		margin-top: 0.4rem;
 		display: inline;
 	}
+}
+
+.espacio-nav {
+	margin-top: 60px;
+}
+
+.espacio {
+	margin: 0px 8%;
 }
 
 .input-codigo {

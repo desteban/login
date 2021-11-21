@@ -26,6 +26,19 @@
 		z-index: 10;
 	}
 
+	.menu-tema {
+		position: absolute;
+		right: 0;
+		margin-right: 1rem;
+		cursor: pointer;
+		font-size: 2rem;
+		transition: all 0.4s ease-in-out;
+
+		&:hover {
+			transform: scale(0.8);
+		}
+	}
+
 	.lista-nav {
 		position: absolute;
 		top: 0;

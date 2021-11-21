@@ -1,0 +1,33 @@
+.dark {
+	background-color: $dark_fondo;
+	color: $dark_texto;
+
+	.nav {
+		background-color: $dark_resaltar;
+	}
+
+	a {
+		color: $dark_enlace;
+		text-decoration: none;
+	}
+
+	@for $i from 1 to 6 {
+		h#{$i} {
+			color: $dark_titulos;
+		}
+	}
+
+	.formulario {
+		background-color: $dark_fondo_formulario;
+	}
+
+	input {
+		background-color: $dark_fondo_card;
+		color: $dark_titulos;
+	}
+
+	.btn {
+		background-color: $dark_boton;
+		color: $dark_texto_boton;
+	}
+}
