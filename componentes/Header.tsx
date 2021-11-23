@@ -95,6 +95,10 @@ export default class Header extends Component {
 						<Link href="/login">
 							<a>Ingresar</a>
 						</Link>
+
+						<Link href="/perfil">
+							<a>Perfil</a>
+						</Link>
 					</div>
 				</div>
 			</nav>

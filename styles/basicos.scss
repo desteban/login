@@ -120,7 +120,8 @@ a {
 }
 
 .espacio {
-	margin: 0px 8%;
+	margin-left: 8%;
+	margin-right: 8%;
 }
 
 .input-codigo {
@@ -138,5 +139,30 @@ a {
 @media screen and (max-width: 768px) {
 	.hide-movile {
 		display: none;
+	}
+}
+
+.borde {
+	border-top: solid 1px $sombra;
+	padding: 1rem;
+	margin-top: 1.5rem;
+}
+
+.card {
+	background-color: $fondo_formulario;
+	padding: 1rem 2rem;
+	margin: 1rem;
+	transition: all 0.4s ease-in-out;
+}
+
+.img-perfil {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	img {
+		border-radius: 100%;
+		overflow: hidden;
+		object-fit: cover;
 	}
 }
