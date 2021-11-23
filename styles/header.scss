@@ -85,10 +85,6 @@
 			display: none;
 		}
 
-		.menu-tema {
-			// display: none;
-		}
-
 		.logo {
 			width: 40%;
 		}
@@ -98,7 +94,7 @@
 			left: 0;
 			height: 50px;
 			width: auto;
-			background-color: $dark_resaltar;
+			// background-color: $dark_resaltar;
 
 			.opciones {
 				position: relative;
@@ -107,7 +103,6 @@
 				padding: 0px;
 				display: flex;
 				flex-direction: row;
-				background-color: $dark_resaltar;
 			}
 		}
 	}

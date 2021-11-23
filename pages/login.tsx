@@ -56,7 +56,12 @@ class Login extends Component<any, Istate> {
 				</Head>
 
 				<div>
-					<p style={{ fontSize: '2rem', textAlign: 'center' }}>Logo</p>
+					<Link href="/">
+						<a>
+							<p style={{ fontSize: '2rem', textAlign: 'center' }}>Logo</p>
+						</a>
+					</Link>
+
 					<div className="formulario round">
 						<h1 style={{ fontSize: '2rem' }}>Iniciar sesión</h1>
 

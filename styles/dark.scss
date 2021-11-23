@@ -4,6 +4,12 @@
 
 	.nav {
 		background-color: $dark_resaltar;
+
+		.lista-nav {
+			.opciones {
+				background-color: $dark_resaltar;
+			}
+		}
 	}
 
 	a {
