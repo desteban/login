@@ -124,3 +124,15 @@ a {
 		text-align: center;
 	}
 }
+
+/*
+	phone [0-480]
+	tablet (480-768]
+	pc (768-1280]
+*/
+
+@media screen and (max-width: 768px) {
+	.hide-movile {
+		display: none;
+	}
+}
