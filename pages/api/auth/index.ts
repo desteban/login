@@ -1,6 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { AgregarUsuario, db } from '../../../util/database';
-import { emailBienvenida, enviarEmail, htmlBIENBENIDA } from '../../../util/email';
+import { enviarEmail, htmlBIENBENIDA } from '../../../util/email';
+import { generarToken } from '../../../util/jwt';
 import { Persona } from '../../../util/persona';
 import { respuesta } from '../../../util/respuesta';
 
@@ -22,6 +23,7 @@ async function POST(req: NextApiRequest, res: NextApiResponse) {
 	const persona: Persona = req.body;
 
 	persona.fecha_creacion = new Date();
+	persona.token = generarToken({ mail: persona.email });
 
 	try {
 		await db.query(AgregarUsuario, [
@@ -29,21 +31,22 @@ async function POST(req: NextApiRequest, res: NextApiResponse) {
 			persona.apellido,
 			persona.email,
 			persona.fecha_creacion,
-			persona.fecha_creacion
+			persona.fecha_creacion,
+			persona.token
 		]);
+
+		let html = await htmlBIENBENIDA(
+			`${persona.nombre}`,
+			`${process.env.PAGEURL}${persona.token}`
+		);
+
+		await enviarEmail(persona.email, 'Bienvenido/a', html);
 
 		respuesta = {
 			code: 201,
 			mensaje:
 				'Usuario registrado exitosamente, se ha enviado un mensaje a su correo electrónico para verificar su cuenta.'
 		};
-
-		let html = await htmlBIENBENIDA(
-			`${persona.nombre}`,
-			'https://www.npmjs.com/package/serverless-mysql'
-		);
-
-		await enviarEmail(persona.email, 'Bienvenido/a', html);
 	} catch (error: any) {
 		respuesta = errorCrearUsuario(error);
 	}
