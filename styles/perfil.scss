@@ -1,0 +1,64 @@
+.perfil {
+	.cabecera {
+		.nombre {
+			text-align: center;
+			font-size: 2rem;
+		}
+	}
+
+	.contenido {
+		padding: 1rem;
+		border-top: 1px solid $sombra;
+		margin-top: 1rem;
+
+		.user {
+			font-size: 1.25rem;
+		}
+
+		.ajustes {
+			margin-top: 1rem;
+			text-align: center;
+
+			.material-icons {
+				position: relative;
+			}
+		}
+	}
+}
+
+/*
+	phone [0-480]
+	tablet (480-768]
+	pc (768-1280]
+*/
+
+@media screen and (min-width: 481px) {
+	.perfil {
+		display: grid;
+		gap: 1rem;
+		grid-template-columns: repeat(5, 1fr);
+
+		.cabecera {
+			grid-column: 1/3;
+
+			.nombre {
+				font-size: 1.5rem;
+			}
+		}
+
+		.contenido {
+			grid-column: 3/-1;
+			border-top: none;
+			border-left: 1px solid $sombra;
+			margin: 0;
+
+			.borde {
+				border: none;
+			}
+
+			.ajustes {
+				text-align: right;
+			}
+		}
+	}
+}
