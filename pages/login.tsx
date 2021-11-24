@@ -111,6 +111,12 @@ class Login extends Component<any, Istate> {
 							</Link>
 							.
 						</p>
+
+						<p>
+							<Link href="/terminos-y-condiciones">
+								<a>Terminos y Condiciones</a>
+							</Link>
+						</p>
 					</div>
 				</div>
 			</div>
