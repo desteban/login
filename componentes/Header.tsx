@@ -92,6 +92,10 @@ export default class Header extends Component {
 							<a>Inicio</a>
 						</Link>
 
+						<Link href="/registro">
+							<a>regístrame </a>
+						</Link>
+
 						<Link href="/login">
 							<a>Ingresar</a>
 						</Link>

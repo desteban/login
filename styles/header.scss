@@ -93,6 +93,8 @@
 			left: 0;
 			height: 50px;
 			width: auto;
+			margin-right: 2rem;
+
 			// background-color: $dark_resaltar;
 
 			.opciones {
@@ -102,6 +104,17 @@
 				padding: 0px;
 				display: flex;
 				flex-direction: row;
+
+				a {
+					font-size: 1rem;
+					transition: all 0.4s ease-in-out;
+					margin: 0px;
+					padding: 16px 1rem;
+
+					&:hover {
+						background-color: #7862ea;
+					}
+				}
 			}
 		}
 	}

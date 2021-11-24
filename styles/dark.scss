@@ -8,6 +8,12 @@
 		.lista-nav {
 			.opciones {
 				background-color: $dark_resaltar;
+
+				a {
+					&:hover {
+						background-color: rgba($boton, 0.8);
+					}
+				}
 			}
 		}
 	}

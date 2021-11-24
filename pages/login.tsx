@@ -110,7 +110,7 @@ class Login extends Component<any, Istate> {
 
 						<p style={{ marginTop: '2rem' }}>
 							¿No tiene una cuenta?
-							<Link href="/">
+							<Link href="/registro">
 								<a> Cree una</a>
 							</Link>
 							.

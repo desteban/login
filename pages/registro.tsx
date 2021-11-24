@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import Head from 'next/head';
+import Link from 'next/link';
 import { Header, Entrada } from '../componentes';
 import evt from '../util/eventos';
 
@@ -86,6 +87,14 @@ class registro extends Component<any, Istate> {
 								Registrarme <span className="material-icons">person_add</span>
 							</button>
 						</div>
+
+						<p style={{ marginTop: '2rem' }}>
+							¿Ya tienes una cuenta?
+							<Link href="/login">
+								<a> inicia sesión</a>
+							</Link>
+							.
+						</p>
 					</div>
 				</main>
 			</div>
