@@ -5,6 +5,7 @@ interface props {
 	value?: string;
 	onChange?: any;
 	autoComplete?: boolean;
+	onKeyPress?: any;
 }
 
 export default function Entrada(props: props) {
@@ -19,6 +20,7 @@ export default function Entrada(props: props) {
 				value={props.value}
 				onChange={props.onChange}
 				autoComplete={props.autoComplete ? 'ON' : 'OFF'}
+				onKeyPress={props.onKeyPress}
 			/>
 		</div>
 	);

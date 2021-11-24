@@ -3,6 +3,9 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { Header, Entrada } from '../componentes';
 import evt from '../util/eventos';
+import axios from 'axios';
+import { validarEmail } from '../util/validaremail';
+import { noEnviarFormulario } from '../util/preventformulario';
 
 interface Istate {
 	nombre: string;
@@ -49,52 +52,59 @@ class registro extends Component<any, Istate> {
 					<p style={{ fontSize: '2rem', textAlign: 'center' }}>Formulario de registro</p>
 
 					<div className="card round">
-						<Entrada
-							label="nombre"
-							id="nombre"
-							value={this.state.nombre}
-							onChange={(evt: evt) => {
-								this.setState({ nombre: evt.target.value });
-							}}
-						/>
-
-						<Entrada
-							label="apellido"
-							id="apellido"
-							value={this.state.apellido}
-							onChange={(evt: evt) => {
-								this.setState({ apellido: evt.target.value });
-							}}
-						/>
-
-						<Entrada
-							label="correo electronico"
-							type="email"
-							id="email"
-							value={this.state.email}
-							onChange={(evt: evt) => {
-								this.setState({ email: evt.target.value });
-							}}
-						/>
-
-						<div style={{ marginTop: '1.5rem' }}>
-							<button
-								className="round btn"
-								onClick={() => {
-									this.limpiar();
+						<form onSubmit={noEnviarFormulario}>
+							<Entrada
+								label="nombre"
+								id="nombre"
+								value={this.state.nombre}
+								onChange={(evt: evt) => {
+									this.setState({ nombre: evt.target.value });
 								}}
-							>
-								Registrarme <span className="material-icons">person_add</span>
-							</button>
-						</div>
+							/>
 
-						<p style={{ marginTop: '2rem' }}>
-							¿Ya tienes una cuenta?
-							<Link href="/login">
-								<a> inicia sesión</a>
-							</Link>
-							.
-						</p>
+							<Entrada
+								label="apellido"
+								id="apellido"
+								value={this.state.apellido}
+								onChange={(evt: evt) => {
+									this.setState({ apellido: evt.target.value });
+								}}
+							/>
+
+							<Entrada
+								label="correo electronico"
+								type="email"
+								id="email"
+								value={this.state.email}
+								onChange={(evt: evt) => {
+									this.setState({ email: evt.target.value });
+								}}
+							/>
+
+							<div style={{ marginTop: '1.5rem' }}>
+								<button
+									className="round btn"
+									onClick={() => {
+										let emailstate = validarEmail(this.state.email);
+										// this.limpiar();
+										console.log(
+											this.state.email,
+											validarEmail(this.state.email)
+										);
+									}}
+								>
+									Registrarme <span className="material-icons">person_add</span>
+								</button>
+							</div>
+
+							<p style={{ marginTop: '2rem' }}>
+								¿Ya tienes una cuenta?
+								<Link href="/login">
+									<a> inicia sesión</a>
+								</Link>
+								.
+							</p>
+						</form>
 					</div>
 				</main>
 			</div>

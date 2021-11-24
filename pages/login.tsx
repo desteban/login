@@ -3,6 +3,7 @@ import Head from 'next/head';
 import evt from '../util/eventos';
 import Entrada from '../componentes/entrada';
 import Link from 'next/link';
+import { noEnviarFormulario } from '../util/preventformulario';
 
 interface Istate {
 	user?: string;
@@ -27,14 +28,13 @@ class Login extends Component<any, Istate> {
 	};
 
 	mostrar_Codigo = () => {
-		let step1: NodeList = document.querySelectorAll('.step1');
-		let step2: NodeList = document.querySelectorAll('.step2');
+		let step1 = document.getElementById('step1');
+		let step2 = document.getElementById('step2');
 
-		this.toogleHide(step1);
-		this.toogleHide(step2);
+		this.toogleHide([step1, step2]);
 	};
 
-	toogleHide = (arr: NodeList) => {
+	toogleHide = (arr: any) => {
 		arr.forEach((elemento: any) => {
 			elemento.classList.toggle('hide');
 		});
@@ -69,44 +69,50 @@ class Login extends Component<any, Istate> {
 					<div className="formulario round">
 						<h1 style={{ fontSize: '2rem' }}>Iniciar sesión</h1>
 
-						<p className="hide step2">
-							Por favor ingresa el código de verificación que se ha enviado a tu
-							correo electrónico
-						</p>
+						<form onSubmit={noEnviarFormulario} className="step1" id="step1">
+							<div>
+								<Entrada
+									id="User"
+									label="Usuario o correo electrónico"
+									value={this.state.user}
+									onChange={(evt: any) => this.cambiar_estado(evt, 'user')}
+								/>
+							</div>
 
-						<div className="step1">
-							<Entrada
-								id="User"
-								label="Usuario o correo electrónico"
-								value={this.state.user}
-								onChange={(evt: any) => this.cambiar_estado(evt, 'user')}
-							/>
-						</div>
+							<div style={{ marginTop: '1.5rem' }}>
+								<button className="round btn" onClick={() => this.mostrar_Codigo()}>
+									Enviar Codigo <span className="material-icons">send</span>
+								</button>
+							</div>
+						</form>
 
-						<div className="hide step2 input-codigo">
-							<Entrada
-								id="Codigo"
-								label="Código de verificación"
-								value={this.state.codigo}
-								onChange={(evt: any) => this.cambiar_estado(evt, 'codigo')}
-								type="number"
-							/>
-						</div>
+						<form id="step2" className="hide" onSubmit={noEnviarFormulario}>
+							<p>
+								Por favor ingresa el código de verificación que se ha enviado a tu
+								correo electrónico
+							</p>
 
-						<div style={{ marginTop: '1.5rem' }}>
-							<button
-								className="round btn step1"
-								onClick={() => this.mostrar_Codigo()}
-							>
-								Enviar Codigo <span className="material-icons">send</span>
-							</button>
-							<button
-								className="round btn hide step2"
-								onClick={() => this.mostrar_Codigo()}
-							>
-								Ingresar
-							</button>
-						</div>
+							<div className="input-codigo">
+								<Entrada
+									id="Codigo"
+									label="Código de verificación"
+									value={this.state.codigo}
+									onChange={(evt: any) => this.cambiar_estado(evt, 'codigo')}
+									type="number"
+								/>
+							</div>
+
+							<div style={{ marginTop: '1.5rem' }}>
+								<button
+									className="round btn"
+									onClick={() => {
+										alert('verificando');
+									}}
+								>
+									Ingresar
+								</button>
+							</div>
+						</form>
 
 						<p style={{ marginTop: '2rem' }}>
 							¿No tiene una cuenta?
