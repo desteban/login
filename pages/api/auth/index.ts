@@ -1,37 +1,25 @@
-import nodemailer from 'nodemailer';
+import { NextApiRequest, NextApiResponse } from 'next';
+import { enviarEmail } from '../../../util/email';
+import { respuesta } from '../../../util/respuesta';
 
-export default async function auth(req: any, res: any) {
-	let respuesta = { code: 200, mensaje: 'Todo esta bien' };
+export default async function auth(req: NextApiRequest, res: NextApiResponse) {
+	let data: respuesta = { code: 200, mensaje: 'Todo salio bien' };
 
 	if (req.method == 'GET') {
-		res.status(respuesta.code).json(respuesta);
+		res.status(data.code).json(data);
+	}
+
+	if (req.method == 'POST') {
+		await POST(req, res);
 	}
 }
 
-async function enviarEmail(email: string) {
-	try {
-		let testAccount = await nodemailer.createTestAccount();
+async function POST(req: NextApiRequest, res: NextApiResponse) {
+	let data: respuesta = { code: 200, mensaje: 'Todo salio bien' };
 
-		var transporter = nodemailer.createTransport({
-			host: 'smtp.gmail.com',
-			port: 465,
-			secure: true,
-			auth: {
-				user: process.env.USERMAIL,
-				pass: process.env.PASSMAIL
-			}
-		});
+	data.data = req.body;
 
-		transporter.verify().then(() => {
-			transporter.sendMail({
-				from: `Il Ristorante <${process.env.USERMAIL}>`,
-				to: `${email}`,
-				subject: 'Asunto',
-				html: `<h1>Codigo html</h1>`
-			});
-		});
-	} catch (error) {
-		console.log('No se puede enviar el correo');
-		console.log(error);
-	}
+	res.status(data.code).json(data);
 }
+
+async function VERIFICAR(req: NextApiRequest, res: NextApiResponse) {}

@@ -53,6 +53,10 @@ class Login extends Component<any, Istate> {
 			>
 				<Head>
 					<title>Login</title>
+					<meta
+						name="description"
+						content="Inicia sesión para poder acceder a todos nuestros servicios"
+					/>
 				</Head>
 
 				<div>
