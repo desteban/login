@@ -15,7 +15,7 @@ CREATE TABLE IF NOT EXISTS usuarios(
 	password VARCHAR(6),
 	token TEXT,
 	verificado BOOL NOT NULL DEFAULT FALSE,
-	rol VARCHAR(20) NOT NULL,
+	rol VARCHAR(20) NOT NULL DEFAULT 'usuario',
 	fecha_creacion DATETIME NOT NULL,
 	fecha_actualizacion DATETIME NOT NULL, 
 	FOREIGN KEY (rol) REFERENCES roles(rol)
