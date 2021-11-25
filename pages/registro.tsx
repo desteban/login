@@ -6,18 +6,21 @@ import evt from '../util/eventos';
 import axios from 'axios';
 import { validarEmail } from '../util/validaremail';
 import { noEnviarFormulario } from '../util/preventformulario';
+import { Persona } from '../util/persona';
+import { respuesta } from '../util/respuesta';
 
 interface Istate {
 	nombre: string;
 	apellido: string;
 	email: string;
+	urls: { api: string };
 }
 
 class registro extends Component<any, Istate> {
 	constructor(props: any) {
 		super(props);
 
-		this.state = { nombre: '', apellido: '', email: '' };
+		this.state = { nombre: '', apellido: '', email: '', urls: props.urls };
 	}
 
 	limpiar = () => {
@@ -85,12 +88,7 @@ class registro extends Component<any, Istate> {
 								<button
 									className="round btn"
 									onClick={() => {
-										let emailstate = validarEmail(this.state.email);
-										// this.limpiar();
-										console.log(
-											this.state.email,
-											validarEmail(this.state.email)
-										);
+										this.enviarPersona();
 									}}
 								>
 									Registrarme <span className="material-icons">person_add</span>
@@ -110,6 +108,53 @@ class registro extends Component<any, Istate> {
 			</div>
 		);
 	}
+
+	enviarPersona = () => {
+		if (!(this.state.nombre && this.state.apellido && this.state.email)) {
+			alert('Por favor verifique los campos, algunos están vacíos');
+		}
+
+		if (this.state.nombre && this.state.apellido && this.state.email) {
+			if (!validarEmail(this.state.email)) {
+				alert('Ingrese un correo electrónico valido');
+			}
+
+			if (validarEmail(this.state.email)) {
+				const data: Persona = {
+					nombre: this.state.nombre,
+					apellido: this.state.apellido,
+					email: this.state.email
+				};
+
+				axios
+					.post(`${this.props.urls.api}auth`, data)
+					.then((data) => {
+						let respuesta: respuesta = data.data;
+
+						alert(respuesta.mensaje);
+
+						if (respuesta.code == 201) {
+							this.limpiarFormulario();
+						}
+					})
+					.catch((error) => {
+						alert('Algo salió mal');
+					});
+			}
+		}
+	};
+
+	limpiarFormulario = () => {
+		this.setState({ nombre: '' });
+		this.setState({ apellido: '' });
+		this.setState({ email: '' });
+	};
+}
+
+export async function getServerSideProps(context: any) {
+	const urls = { api: process.env.APIURL };
+
+	return { props: { urls } };
 }
 
 export default registro;

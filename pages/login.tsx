@@ -73,7 +73,7 @@ class Login extends Component<any, Istate> {
 							<div>
 								<Entrada
 									id="User"
-									label="Usuario o correo electrónico"
+									label="Correo electrónico"
 									value={this.state.user}
 									onChange={(evt: any) => this.cambiar_estado(evt, 'user')}
 								/>
