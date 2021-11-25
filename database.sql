@@ -39,7 +39,7 @@ $$
 DELIMITER ; 
 
 DELIMITER $$
-CREATE PROCEDURE  verificacion(IN _token TEXT, _fecha DATETIME)
+CREATE PROCEDURE verificacion(IN _token TEXT, _fecha DATETIME)
 BEGIN
 	SET @usuario = (SELECT id_usuario FROM usuarios WHERE token = _token);
 	
@@ -49,12 +49,29 @@ BEGIN
 	
 	INSERT INTO usuarios_log (id_usuario, id_evento, fechas)
 	VALUES (@usuario, 1, _fecha);
+	SELECT email FROM usuarios WHERE id_usuario = @usuario AND verificado = FALSE;
 END $$
 DELIMITER ;
 
+
+DELIMITER $$
+CREATE TRIGGER validarVerifiacion BEFORE INSERT ON usuarios_log
+FOR EACH ROW
+BEGIN
+	SET @contador = (SELECT COUNT(id_usuario) FROM usuarios_log WHERE id_usuario = NEW.id_usuario AND id_evento = 1);
+	
+	IF (@contador >= 1) THEN
+		SIGNAL SQLSTATE '45000'
+		SET MESSAGE_TEXT = 'El usuario ya fue verificado ';
+	END IF;
+	
+END $$
+DELIMITER ;
 #---------------------------------------------------------------------------------------------------------------------------
 
 INSERT INTO eventos (id_evento, evento) 
 	VALUES (1, 'verificación de la cuenta '), (2, 'Creación del usuario '), (3, 'Código de Seguridad');
 	
 INSERT INTO roles (rol) VALUES ('usuario');
+
+

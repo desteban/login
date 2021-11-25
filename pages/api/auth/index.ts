@@ -110,6 +110,10 @@ async function PUT(req: NextApiRequest, res: NextApiResponse) {
 		if (error.errno == 1048) {
 			respuesta = { code: 404, mensaje: 'Usuario no encontrado' };
 		}
+
+		if (error.errno == 1644) {
+			respuesta = { code: 200, mensaje: error.sqlMessage };
+		}
 	}
 
 	res.status(respuesta.code).json(respuesta);
