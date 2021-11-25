@@ -28,3 +28,33 @@ CREATE TABLE IF NOT EXISTS usuarios_log(
 	FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario),
 	FOREIGN KEY (id_evento) REFERENCES eventos(id_evento)
 );
+
+DELIMITER $$
+CREATE TRIGGER `registro` AFTER INSERT ON usuarios
+FOR EACH ROW BEGIN
+	INSERT INTO usuarios_log (id_usuario, id_evento, fechas)
+	VALUES (NEW.id_usuario, 2, NEW.fecha_creacion);
+END
+$$
+DELIMITER ; 
+
+DELIMITER $$
+CREATE PROCEDURE  verificacion(IN _token TEXT, _fecha DATETIME)
+BEGIN
+	SET @usuario = (SELECT id_usuario FROM usuarios WHERE token = _token);
+	
+	UPDATE usuarios 
+	SET verificado = TRUE
+	WHERE id_usuario = @usuario;
+	
+	INSERT INTO usuarios_log (id_usuario, id_evento, fechas)
+	VALUES (@usuario, 1, _fecha);
+END $$
+DELIMITER ;
+
+#---------------------------------------------------------------------------------------------------------------------------
+
+INSERT INTO eventos (id_evento, evento) 
+	VALUES (1, 'verificación de la cuenta '), (2, 'Creación del usuario '), (3, 'Código de Seguridad');
+	
+INSERT INTO roles (rol) VALUES ('usuario');

@@ -12,4 +12,4 @@ export let db = mysql({
 export const AgregarUsuario: string =
 	'INSERT INTO usuarios(nombre, apellido, email, fecha_creacion, fecha_actualizacion, token) VALUES (?, ?, ?, ?, ?, ?);';
 
-export const AutenticarUsuario: string = 'UPDATE usuarios SET verificado = TRUE WHERE token = ?';
+export const AutenticarUsuario: string = 'CALL verificacion(?,?)';

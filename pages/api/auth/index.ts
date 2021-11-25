@@ -28,10 +28,10 @@ async function POST(req: NextApiRequest, res: NextApiResponse) {
 		mensaje: 'Algunos campos no cumplen con un formato valido o están vacíos'
 	};
 
-	const persona: Persona = req.body;
+	let persona: Persona = req.body;
 
 	persona.fecha_creacion = new Date();
-	persona.token = generarToken({ mail: persona.email });
+	persona.token = generarToken({ mail: persona.email, nombre: persona.nombre });
 
 	if (!validarEmail(persona.email)) {
 		respuesta = { code: 400, mensaje: 'No se ha enviado un formato de email valido' };
@@ -39,6 +39,8 @@ async function POST(req: NextApiRequest, res: NextApiResponse) {
 
 	if (validarPersona(persona)) {
 		try {
+			persona = UpperCase(persona);
+
 			await db.query(AgregarUsuario, [
 				persona.nombre,
 				persona.apellido,
@@ -92,8 +94,11 @@ function errorCrearUsuario(error: any): respuesta {
 
 async function PUT(req: NextApiRequest, res: NextApiResponse) {
 	let respuesta: respuesta = { code: 200, mensaje: 'Usuario verificado' };
+
+	const fecha: Date = new Date();
+
 	try {
-		let persona: any = await db.query(AutenticarUsuario, [req.body.token]);
+		let persona: any = await db.query(AutenticarUsuario, [req.body.token, fecha]);
 
 		if (persona.affectedRows == 0) {
 			respuesta = { code: 404, mensaje: 'Usuario no encontrado' };
@@ -105,4 +110,11 @@ async function PUT(req: NextApiRequest, res: NextApiResponse) {
 	}
 
 	res.status(respuesta.code).json(respuesta);
+}
+
+function UpperCase(persona: Persona): Persona {
+	persona.nombre = persona.nombre?.toUpperCase();
+	persona.apellido = persona.apellido?.toUpperCase();
+
+	return persona;
 }
