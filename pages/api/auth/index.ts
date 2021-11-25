@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { AgregarUsuario, AutenticarUsuario, db } from '../../../util/database';
-import { enviarEmail, htmlBIENBENIDA } from '../../../util/email';
+import { enviarEmail, htmlBIENBENIDA, htmlCuentaVerificada } from '../../../util/email';
 import { generarToken } from '../../../util/jwt';
 import { Persona } from '../../../util/persona';
 import { respuesta } from '../../../util/respuesta';
@@ -100,13 +100,16 @@ async function PUT(req: NextApiRequest, res: NextApiResponse) {
 	try {
 		let persona: any = await db.query(AutenticarUsuario, [req.body.token, fecha]);
 
-		if (persona.affectedRows == 0) {
-			respuesta = { code: 404, mensaje: 'Usuario no encontrado' };
+		let email = persona[0][0].email;
+		if (email) {
+			enviarEmail(email, 'Cuenta verificada con éxito', htmlCuentaVerificada);
 		}
 
 		await db.end();
-	} catch (error) {
-		console.log(error);
+	} catch (error: any) {
+		if (error.errno == 1048) {
+			respuesta = { code: 404, mensaje: 'Usuario no encontrado' };
+		}
 	}
 
 	res.status(respuesta.code).json(respuesta);
