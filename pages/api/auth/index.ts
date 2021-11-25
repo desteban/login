@@ -4,6 +4,7 @@ import { enviarEmail, htmlBIENBENIDA } from '../../../util/email';
 import { generarToken } from '../../../util/jwt';
 import { Persona } from '../../../util/persona';
 import { respuesta } from '../../../util/respuesta';
+import { validarEmail } from '../../../util/validaremail';
 
 export default async function auth(req: NextApiRequest, res: NextApiResponse) {
 	let data: respuesta = { code: 200, mensaje: 'Todo salio bien' };
@@ -22,42 +23,59 @@ export default async function auth(req: NextApiRequest, res: NextApiResponse) {
 }
 
 async function POST(req: NextApiRequest, res: NextApiResponse) {
-	let respuesta: respuesta = { code: 200, mensaje: 'Todo salio bien' };
+	let respuesta: respuesta = {
+		code: 400,
+		mensaje: 'Algunos campos no cumplen con un formato valido o están vacíos'
+	};
 
 	const persona: Persona = req.body;
 
 	persona.fecha_creacion = new Date();
 	persona.token = generarToken({ mail: persona.email });
 
-	try {
-		await db.query(AgregarUsuario, [
-			persona.nombre,
-			persona.apellido,
-			persona.email,
-			persona.fecha_creacion,
-			persona.fecha_creacion,
-			persona.token
-		]);
+	if (!validarEmail(persona.email)) {
+		respuesta = { code: 400, mensaje: 'No se ha enviado un formato de email valido' };
+	}
 
-		let html = await htmlBIENBENIDA(
-			`${persona.nombre}`,
-			`${process.env.PAGEURL}validar/${persona.token}`
-		);
+	if (validarPersona(persona)) {
+		try {
+			await db.query(AgregarUsuario, [
+				persona.nombre,
+				persona.apellido,
+				persona.email,
+				persona.fecha_creacion,
+				persona.fecha_creacion,
+				persona.token
+			]);
 
-		await enviarEmail(persona.email, 'Bienvenido/a', html);
+			let html = await htmlBIENBENIDA(
+				`${persona.nombre}`,
+				`${process.env.PAGEURL}validar/${persona.token}`
+			);
 
-		respuesta = {
-			code: 201,
-			mensaje:
-				'Usuario registrado exitosamente, se ha enviado un mensaje a su correo electrónico para verificar su cuenta.'
-		};
-	} catch (error: any) {
-		respuesta = errorCrearUsuario(error);
+			await enviarEmail(persona.email, 'Bienvenido/a', html);
+
+			respuesta = {
+				code: 201,
+				mensaje:
+					'Usuario registrado exitosamente, se ha enviado un mensaje a su correo electrónico para verificar su cuenta.'
+			};
+		} catch (error: any) {
+			respuesta = errorCrearUsuario(error);
+		}
 	}
 
 	await db.end();
 
 	res.status(respuesta.code).json(respuesta);
+}
+
+function validarPersona(persona: Persona): boolean {
+	if (validarEmail(persona.email) && persona.nombre && persona.apellido) {
+		return true;
+	}
+
+	return false;
 }
 
 function errorCrearUsuario(error: any): respuesta {
