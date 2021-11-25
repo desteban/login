@@ -51,8 +51,10 @@ export async function htmlBIENBENIDA(nombre: string, link: string) {
 		<p>
 			Te has registrado exitosamente en nuestra página, por favor ingresa en el siguiente
 			<a href="${link}" target="_blanck">enlace</a> para activar y verificar tu cuenta o puedes
-			copiar el siguiente link ${link}
+			copiar el siguiente link
 		</p>
+
+		<p>${link}</p>
 	</div>
 
 	<div

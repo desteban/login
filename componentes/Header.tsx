@@ -11,7 +11,7 @@ export default class Header extends Component {
 	}
 
 	componentDidMount() {
-		this.escojerTema();
+		escojerTema();
 	}
 
 	toggle_menu = () => {
@@ -39,28 +39,6 @@ export default class Header extends Component {
 		if (estado) {
 			estado.tema = !estado.tema;
 			localStorage.setItem('tema', JSON.stringify(estado));
-		}
-	}
-
-	escojerTema() {
-		let tema = localStorage.getItem('tema');
-		let body = document.querySelector('body');
-		let html = document.querySelector('html');
-		let estado;
-
-		if (tema) {
-			estado = JSON.parse(tema);
-		}
-
-		if (!estado) {
-			localStorage.setItem('tema', JSON.stringify({ tema: true }));
-		}
-
-		if (estado) {
-			if (!estado.tema) {
-				body?.classList.add('dark');
-				html?.classList.add('dark');
-			}
 		}
 	}
 
@@ -107,5 +85,27 @@ export default class Header extends Component {
 				</div>
 			</nav>
 		);
+	}
+}
+
+export function escojerTema() {
+	let tema = localStorage.getItem('tema');
+	let body = document.querySelector('body');
+	let html = document.querySelector('html');
+	let estado;
+
+	if (tema) {
+		estado = JSON.parse(tema);
+	}
+
+	if (!estado) {
+		localStorage.setItem('tema', JSON.stringify({ tema: true }));
+	}
+
+	if (estado) {
+		if (!estado.tema) {
+			body?.classList.add('dark');
+			html?.classList.add('dark');
+		}
 	}
 }

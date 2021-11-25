@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { AgregarUsuario, db } from '../../../util/database';
+import { AgregarUsuario, AutenticarUsuario, db } from '../../../util/database';
 import { enviarEmail, htmlBIENBENIDA } from '../../../util/email';
 import { generarToken } from '../../../util/jwt';
 import { Persona } from '../../../util/persona';
@@ -14,6 +14,10 @@ export default async function auth(req: NextApiRequest, res: NextApiResponse) {
 
 	if (req.method == 'POST') {
 		await POST(req, res);
+	}
+
+	if (req.method == 'PUT') {
+		await PUT(req, res);
 	}
 }
 
@@ -37,7 +41,7 @@ async function POST(req: NextApiRequest, res: NextApiResponse) {
 
 		let html = await htmlBIENBENIDA(
 			`${persona.nombre}`,
-			`${process.env.PAGEURL}${persona.token}`
+			`${process.env.PAGEURL}validar/${persona.token}`
 		);
 
 		await enviarEmail(persona.email, 'Bienvenido/a', html);
@@ -68,4 +72,19 @@ function errorCrearUsuario(error: any): respuesta {
 	return { code: 400, mensaje: 'Algo salió mal, por favor verifica la información' };
 }
 
-async function VERIFICAR(req: NextApiRequest, res: NextApiResponse) {}
+async function PUT(req: NextApiRequest, res: NextApiResponse) {
+	let respuesta: respuesta = { code: 200, mensaje: 'Usuario verificado' };
+	try {
+		let persona: any = await db.query(AutenticarUsuario, [req.body.token]);
+
+		if (persona.affectedRows == 0) {
+			respuesta = { code: 404, mensaje: 'Usuario no encontrado' };
+		}
+
+		await db.end();
+	} catch (error) {
+		console.log(error);
+	}
+
+	res.status(respuesta.code).json(respuesta);
+}

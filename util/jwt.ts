@@ -12,3 +12,13 @@ export function generarToken(data: any) {
 		return undefined;
 	}
 }
+
+export function validarToken(token: any) {
+	jwt.verify(token, `${process.env.JWTPASS}`, (err: any, email: any) => {
+		if (err) {
+			return false;
+		}
+
+		return true;
+	});
+}
