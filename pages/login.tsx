@@ -1,7 +1,7 @@
 import { Component } from 'react';
 import Head from 'next/head';
 import evt from '../util/eventos';
-import Entrada from '../componentes/entrada';
+import Entrada from '../componentes/Entrada';
 import Link from 'next/link';
 import { noEnviarFormulario } from '../util/preventformulario';
 
