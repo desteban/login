@@ -41,7 +41,7 @@ DELIMITER ;
 DELIMITER $$
 CREATE PROCEDURE verificacion(IN _token TEXT, _fecha DATETIME)
 BEGIN
-	SET @usuario = (SELECT id_usuario FROM usuarios WHERE token = _token);
+	SET @usuario = (SELECT id_usuario FROM usuarios WHERE token = _token AND verificado = FALSE );
 	
 	UPDATE usuarios 
 	SET verificado = TRUE
@@ -83,9 +83,21 @@ BEGIN
 END $$
 DELIMITER ;
 
+DELIMITER $$
+CREATE PROCEDURE cambiarToken (IN _token TEXT, IN _id INTEGER, IN _fecha DATETIME)
+BEGIN
+	UPDATE usuarios 
+	SET token = _token, password = ''
+	WHERE id_usuario = _id;
+	
+	INSERT INTO usuarios_log (id_usuario, id_evento, fechas)
+	VALUES (_id, 4, _fecha);
+END $$
+DELIMITER ;
+
 #---------------------------------------------------------------------------------------------------------------------------
 
 INSERT INTO eventos (id_evento, evento) 
-	VALUES (1, 'verificación de la cuenta '), (2, 'Creación del usuario '), (3, 'Código de Seguridad');
+	VALUES (1, 'verificación de la cuenta '), (2, 'Creación del usuario '), (3, 'Código de Seguridad'), (4, 'Sesión iniciada');
 	
 INSERT INTO roles (rol) VALUES ('usuario');

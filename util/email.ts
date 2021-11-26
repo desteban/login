@@ -148,3 +148,43 @@ export function htmlCodigodeSeguridad(persona: Persona) {
 
 	return html;
 }
+
+export function htmlInisiarSesion(persona: Persona) {
+	let html = `<div style="color: #2b2c34">
+	<div
+		class="cabecera"
+		style="border-radius: 1rem; background-color: #eaeaec; padding: 1rem; text-align: center"
+	>
+		<h1>Iniciaste sesión</h1>
+		<p>Hola ${persona.nombre}!</p>
+	</div>
+
+	<div
+		style="
+			margin-top: 1rem;
+			margin-bottom: 1rem;
+			margin-right: 8%;
+			margin-left: 8%;
+			padding: 1rem;
+		"
+	>
+		<p>
+		Felicidades, iniciaste sesión en nuestra pagina 
+		</p>
+	</div>
+
+	<div
+		style="
+			text-align: center;
+			border-top: 1px solid rgb(128, 126, 121);
+			padding: 1rem;
+			margin-top: 1rem;
+		"
+	>
+		<a href="${process.env.PAGEURL}/terminos-y-condiciones">Terminos y condiciones</a>
+	</div>
+</div>
+`;
+
+	return html;
+}

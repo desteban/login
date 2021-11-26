@@ -1,10 +1,11 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { CambiarCodigo, db, ObtenerUsuario } from '../../../util/database';
-import { enviarEmail, htmlCodigodeSeguridad } from '../../../util/email';
+import { CambiarCodigo, CambiarToken, db, ObtenerUsuario } from '../../../util/database';
+import { enviarEmail, htmlCodigodeSeguridad, htmlInisiarSesion } from '../../../util/email';
 import { Persona } from '../../../util/persona';
 import { respuesta } from '../../../util/respuesta';
 import bcrypt from 'bcrypt';
 import { exit } from 'process';
+import { generarToken } from '../../../util/jwt';
 
 export default async function cuentas(req: NextApiRequest, res: NextApiResponse) {
 	if (req.method == 'POST') {
@@ -122,8 +123,20 @@ async function validarPassword(persona: Persona, personadb: Persona, res: NextAp
 	await bcrypt.compare(`${persona.password}`, `${personadb.password}`, (err, result) => {
 		if (result) {
 			respuesta.mensaje = 'Credenciales validas';
-			personadb.password = undefined;
-			respuesta.data = { persona: personadb };
+
+			let fecha: Date = new Date();
+
+			persona.id_usuario = personadb.id_usuario;
+			delete persona.password;
+			delete personadb.password;
+
+			//generar token para autenticar usuario
+			let token = generarToken(persona);
+			respuesta.data = { persona: personadb, token: `${token}` };
+
+			db.query(CambiarToken, [token, personadb.id_usuario, fecha]);
+
+			enviarEmail(personadb.email, 'Iniciaste sesión ', htmlInisiarSesion(personadb));
 			enviarRespuesta(respuesta, res);
 		}
 
