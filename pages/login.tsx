@@ -1,7 +1,7 @@
 import { Component } from 'react';
 import Head from 'next/head';
 import evt from '../util/eventos';
-import Entrada from '../componentes/Entrada';
+import { Entrada, Header } from '../componentes';
 import Link from 'next/link';
 import { noEnviarFormulario } from '../util/preventformulario';
 
@@ -58,6 +58,10 @@ class Login extends Component<any, Istate> {
 						content="Inicia sesión para poder acceder a todos nuestros servicios"
 					/>
 				</Head>
+
+				<div className="hide">
+					<Header />
+				</div>
 
 				<div>
 					<Link href="/">

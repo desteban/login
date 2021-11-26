@@ -100,6 +100,7 @@ async function PUT(req: NextApiRequest, res: NextApiResponse) {
 	try {
 		let persona: any = await db.query(AutenticarUsuario, [req.body.token, fecha]);
 
+		// verificar que el email exista en la base de datos
 		let email = persona[0][0].email;
 		if (email) {
 			enviarEmail(email, 'Cuenta verificada con éxito', htmlCuentaVerificada);

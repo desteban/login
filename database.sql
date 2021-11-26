@@ -12,7 +12,7 @@ CREATE TABLE IF NOT EXISTS usuarios(
 	nombre VARCHAR(50) NOT NULL,
 	apellido VARCHAR(50) NOT NULL,
 	email VARCHAR(50) NOT NULL UNIQUE,
-	password VARCHAR(6),
+	password TEXT,
 	token TEXT,
 	verificado BOOL NOT NULL DEFAULT FALSE,
 	rol VARCHAR(20) NOT NULL DEFAULT 'usuario',
@@ -49,7 +49,7 @@ BEGIN
 	
 	INSERT INTO usuarios_log (id_usuario, id_evento, fechas)
 	VALUES (@usuario, 1, _fecha);
-	SELECT email FROM usuarios WHERE id_usuario = @usuario AND verificado = FALSE;
+	SELECT email FROM usuarios WHERE id_usuario = @usuario AND verificado = TRUE;
 END $$
 DELIMITER ;
 
@@ -67,11 +67,21 @@ BEGIN
 	
 END $$
 DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE codigoSeguridad (IN _codigo TEXT, IN _email VARCHAR(50))
+BEGIN
+	UPDATE usuarios
+	SET password = _codigo
+	WHERE email =  _email AND verificado = TRUE;
+	
+	SELECT nombre, apellido, email FROM usuarios WHERE email =  _email;
+END $$
+DELIMITER ;
+
 #---------------------------------------------------------------------------------------------------------------------------
 
 INSERT INTO eventos (id_evento, evento) 
 	VALUES (1, 'verificación de la cuenta '), (2, 'Creación del usuario '), (3, 'Código de Seguridad');
 	
 INSERT INTO roles (rol) VALUES ('usuario');
-
-

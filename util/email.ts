@@ -17,7 +17,7 @@ export async function enviarEmail(email: string, asunto: string, texto: any) {
 
 		transporter.verify().then(() => {
 			transporter.sendMail({
-				from: `Equipo de trabajo <${process.env.USERMAIL}>`,
+				from: `Social LSD Services <${process.env.USERMAIL}>`,
 				to: `${email}`,
 				subject: asunto,
 				html: `${texto}`
@@ -107,3 +107,44 @@ export const htmlCuentaVerificada = `<div style="color: #2b2c34">
 </div>
 </div>
 `;
+
+export function htmlCodigodeSeguridad(persona: Persona) {
+	let html = `<div style="color: #2b2c34">
+	<div
+		class="cabecera"
+		style="border-radius: 1rem; background-color: #eaeaec; padding: 1rem; text-align: center"
+	>
+		<h1>Código de seguridad</h1>
+		<p>Hola ${persona.nombre}!</p>
+	</div>
+
+	<div
+		style="
+			margin-top: 1rem;
+			margin-bottom: 1rem;
+			margin-right: 8%;
+			margin-left: 8%;
+			padding: 1rem;
+		"
+	>
+		<p>
+		Alguien ha intentado ingresar a tu cuenta con ${persona.email}. Si has sido tú, introduce este código de confirmación en la aplicación:
+		</p>
+		<p style="text-align: center; font-size: 3rem; letter-spacing: 1rem">${persona.password}</p>
+	</div>
+
+	<div
+		style="
+			text-align: center;
+			border-top: 1px solid rgb(128, 126, 121);
+			padding: 1rem;
+			margin-top: 1rem;
+		"
+	>
+		<a href="${process.env.PAGEURL}/terminos-y-condiciones">Terminos y condiciones</a>
+	</div>
+</div>
+`;
+
+	return html;
+}

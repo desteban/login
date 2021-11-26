@@ -6,4 +6,5 @@ export interface Persona {
 	fecha_creacion?: Date;
 	fecha_actualizacion?: Date;
 	token?: string;
+	password?: string;
 }

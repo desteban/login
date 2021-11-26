@@ -31,7 +31,6 @@ export async function getServerSideProps(context: any) {
 		.put(`${process.env.APIURL}auth`, { token: token })
 		.then((res) => {
 			let respuesta: respuesta = res.data;
-			console.log(respuesta);
 		})
 		.catch((error: any) => {});
 
