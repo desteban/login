@@ -58,9 +58,9 @@ DELIMITER $$
 CREATE TRIGGER validarVerifiacion BEFORE INSERT ON usuarios_log
 FOR EACH ROW
 BEGIN
-	SET @contador = (SELECT COUNT(id_usuario) FROM usuarios_log WHERE id_usuario = NEW.id_usuario AND id_evento = 1);
+	SET @contador = (SELECT COUNT(id_evento) FROM usuarios_log WHERE id_usuario = NEW.id_usuario AND id_evento = 1);
 	
-	IF (@contador >= 1) THEN
+	IF (@contador > 1) THEN
 		SIGNAL SQLSTATE '45000'
 		SET MESSAGE_TEXT = 'El usuario ya fue verificado ';
 	END IF;
@@ -69,11 +69,15 @@ END $$
 DELIMITER ;
 
 DELIMITER $$
-CREATE PROCEDURE codigoSeguridad (IN _codigo TEXT, IN _email VARCHAR(50))
+CREATE PROCEDURE codigoSeguridad (IN _codigo TEXT, IN _email VARCHAR(50), IN _fecha DATETIME)
 BEGIN
+	SET @_id_usuario = (SELECT id_usuario FROM usuarios WHERE email =  _email);
+
 	UPDATE usuarios
 	SET password = _codigo
 	WHERE email =  _email AND verificado = TRUE;
+	
+	INSERT INTO usuarios_log (id_usuario, id_evento, fechas) VALUES ( @_id_usuario, 3, _fecha );
 	
 	SELECT nombre, apellido, email FROM usuarios WHERE email =  _email;
 END $$

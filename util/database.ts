@@ -15,4 +15,7 @@ export const AgregarUsuario: string =
 
 export const AutenticarUsuario: string = 'CALL verificacion(?,?)';
 
-export const CambiarCodigo: string = 'CALL codigoSeguridad(?, ?);';
+export const CambiarCodigo: string = 'CALL codigoSeguridad(?, ?, ?);';
+
+export const ObtenerUsuario: string =
+	'	SELECT nombre, apellido, email, password FROM usuarios WHERE email = ?;';
