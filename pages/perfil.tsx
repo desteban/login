@@ -3,9 +3,9 @@ import { Header } from '../componentes';
 import Image from 'next/image';
 import Head from 'next/head';
 import Link from 'next/link';
-import Router from 'next/router';
 import { Persona } from '../util/persona';
 import RutaSegura from '../util/rutasegura';
+import cerrarSesion from '../util/CerrarSesion';
 
 interface Istate {
 	persona?: Persona;
@@ -66,7 +66,7 @@ class perfil extends Component<any, Istate> {
 									justifyContent: 'space-between'
 								}}
 							>
-								<p className="click">
+								<p className="click" onClick={() => cerrarSesion()}>
 									Salir
 									<span className="material-icons derecha">exit_to_app</span>
 								</p>

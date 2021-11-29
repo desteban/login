@@ -2,6 +2,7 @@ import { Component } from 'react';
 
 import Link from 'next/link';
 import { Persona } from '../util/persona';
+import cerrarSesion from '../util/CerrarSesion';
 
 interface Istate {
 	tema?: boolean;
@@ -82,11 +83,7 @@ export default class Header extends Component<any, Istate> {
 
 						{!this.state.user ? UsuariosNoAutenticados() : null}
 
-						{this.state.user ? (
-							<Link href="/perfil">
-								<a>Perfil</a>
-							</Link>
-						) : null}
+						{this.state.user ? UsuariosAutenticados() : null}
 					</div>
 				</div>
 			</nav>
@@ -104,6 +101,21 @@ function UsuariosNoAutenticados() {
 			<Link href="/registro">
 				<a>regístrame </a>
 			</Link>
+		</div>
+	);
+}
+
+function UsuariosAutenticados() {
+	return (
+		<div>
+			<Link href="/perfil">
+				<a>Perfil</a>
+			</Link>
+
+			<a className="click" onClick={() => cerrarSesion()}>
+				Salir
+				<span className="material-icons derecha">exit_to_app</span>
+			</a>
 		</div>
 	);
 }

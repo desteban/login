@@ -1,5 +1,4 @@
 import jwt from 'jsonwebtoken';
-import { Persona } from './persona';
 
 export function generarToken(data: any) {
 	try {
