@@ -4,15 +4,24 @@ import Link from 'next/link';
 import { Persona } from '../util/persona';
 
 interface Istate {
-	tema: boolean;
+	tema?: boolean;
+	user?: boolean;
 }
-export default class Header extends Component {
+export default class Header extends Component<any, Istate> {
 	constructor(props: any) {
 		super(props);
+
+		this.state = { user: false };
 	}
 
 	componentDidMount() {
 		escojerTema();
+
+		let token: any = localStorage.getItem('token');
+
+		if (token) {
+			this.setState({ user: true });
+		}
 	}
 
 	toggle_menu = () => {
@@ -71,22 +80,32 @@ export default class Header extends Component {
 							<a>Inicio</a>
 						</Link>
 
-						<Link href="/registro">
-							<a>regístrame </a>
-						</Link>
+						{!this.state.user ? UsuariosNoAutenticados() : null}
 
-						<Link href="/login">
-							<a>Ingresar</a>
-						</Link>
-
-						<Link href="/perfil">
-							<a>Perfil</a>
-						</Link>
+						{this.state.user ? (
+							<Link href="/perfil">
+								<a>Perfil</a>
+							</Link>
+						) : null}
 					</div>
 				</div>
 			</nav>
 		);
 	}
+}
+
+function UsuariosNoAutenticados() {
+	return (
+		<div>
+			<Link href="/login">
+				<a>Ingresar</a>
+			</Link>
+
+			<Link href="/registro">
+				<a>regístrame </a>
+			</Link>
+		</div>
+	);
 }
 
 export function escojerTema() {

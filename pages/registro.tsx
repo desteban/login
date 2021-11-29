@@ -8,6 +8,7 @@ import { validarEmail } from '../util/validaremail';
 import { noEnviarFormulario } from '../util/preventformulario';
 import { Persona } from '../util/persona';
 import { respuesta } from '../util/respuesta';
+import Router from 'next/router';
 
 interface Istate {
 	nombre: string;
@@ -21,6 +22,15 @@ class registro extends Component<any, Istate> {
 		super(props);
 
 		this.state = { nombre: '', apellido: '', email: '', urls: props.urls };
+	}
+
+	componentDidMount() {
+		let token: any = localStorage.getItem('token');
+
+		if (token) {
+			Router.push('/');
+			alert('El usuario ya fue autenticado');
+		}
 	}
 
 	limpiar = () => {

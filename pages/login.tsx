@@ -31,6 +31,15 @@ class Login extends Component<any, Istate> {
 		};
 	}
 
+	componentDidMount() {
+		let token: any = localStorage.getItem('token');
+
+		if (token) {
+			Router.push('/');
+			alert('El usuario ya fue autenticado');
+		}
+	}
+
 	cambiar_estado = (event: evt, estado: any) => {
 		this.setState({ [estado]: event.target.value });
 	};

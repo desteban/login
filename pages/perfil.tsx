@@ -5,6 +5,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import Router from 'next/router';
 import { Persona } from '../util/persona';
+import RutaSegura from '../util/rutasegura';
 
 interface Istate {
 	persona?: Persona;
@@ -12,11 +13,11 @@ interface Istate {
 class perfil extends Component<any, Istate> {
 	constructor(props: any) {
 		super(props);
-
 		this.state = {};
 	}
 
 	componentDidMount() {
+		RutaSegura();
 		let persona: Persona = JSON.parse(`${localStorage.getItem('usuario')}`);
 
 		this.setState({ persona });
