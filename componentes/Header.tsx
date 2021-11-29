@@ -1,6 +1,7 @@
 import { Component } from 'react';
 
 import Link from 'next/link';
+import { Persona } from '../util/persona';
 
 interface Istate {
 	tema: boolean;
@@ -108,4 +109,9 @@ export function escojerTema() {
 			html?.classList.add('dark');
 		}
 	}
+}
+
+export function enviarLocalStorege(persona: Persona, token: string) {
+	localStorage.setItem('usuario', JSON.stringify(persona));
+	localStorage.setItem('token', JSON.stringify(token));
 }

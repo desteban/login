@@ -54,6 +54,13 @@ export async function htmlBIENBENIDA(nombre: string, link: string) {
 			copiar el siguiente link
 		</p>
 
+		<p>
+		<strong
+			>Recuerda que para poder ingresar a tu perfil es necesario verificar tu
+			cuenta</strong
+		>
+	</p>
+
 		<p>${link}</p>
 	</div>
 
