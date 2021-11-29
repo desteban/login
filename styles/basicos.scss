@@ -57,11 +57,6 @@ a {
 	transition: all 0.4s ease-in-out;
 }
 
-.material-icons {
-	position: absolute;
-	margin-left: 5px;
-}
-
 .hide {
 	display: none;
 }
@@ -171,4 +166,9 @@ a {
 		overflow: hidden;
 		object-fit: cover;
 	}
+}
+
+.derecha {
+	float: right;
+	margin-left: 5px;
 }

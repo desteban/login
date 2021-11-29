@@ -1,7 +1,7 @@
 import { Component } from 'react';
 import Head from 'next/head';
 import evt from '../util/eventos';
-import { Entrada, Header } from '../componentes';
+import { Entrada, Header, Loader } from '../componentes';
 import Link from 'next/link';
 import { noEnviarFormulario } from '../util/preventformulario';
 import axios from 'axios';
@@ -83,12 +83,7 @@ class Login extends Component<any, Istate> {
 
 						<form onSubmit={noEnviarFormulario} className="step1" id="step1">
 							<div style={{ textAlign: 'center' }} className="hide loader">
-								<div className="lds-ring">
-									<div></div>
-									<div></div>
-									<div></div>
-									<div></div>
-								</div>
+								<Loader />
 							</div>
 
 							<div>
@@ -109,12 +104,7 @@ class Login extends Component<any, Istate> {
 
 						<form id="step2" className="hide" onSubmit={noEnviarFormulario}>
 							<div>
-								<span
-									className="material-icons click"
-									style={{ position: 'relative' }}
-								>
-									arrow_back
-								</span>
+								<span className="material-icons click">arrow_back</span>
 							</div>
 							<p>
 								Por favor ingresa el código de verificación que se ha enviado a tu
@@ -122,12 +112,7 @@ class Login extends Component<any, Istate> {
 							</p>
 
 							<div style={{ textAlign: 'center' }} className="hide loader">
-								<div className="lds-ring">
-									<div></div>
-									<div></div>
-									<div></div>
-									<div></div>
-								</div>
+								<Loader />
 							</div>
 
 							<div className="input-codigo">
