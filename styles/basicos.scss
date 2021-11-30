@@ -177,3 +177,9 @@ a {
 	float: right;
 	margin-left: 5px;
 }
+
+ol {
+	& > li {
+		margin-top: 1.5rem;
+	}
+}

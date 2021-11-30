@@ -112,6 +112,12 @@ class registro extends Component<any, Istate> {
 								</Link>
 								.
 							</p>
+
+							<p>
+								<Link href="/terminos-y-condiciones">
+									<a>Terminos y Condiciones</a>
+								</Link>
+							</p>
 						</form>
 					</div>
 				</main>
