@@ -2,7 +2,7 @@ import Router from 'next/router';
 
 export default function RutaSegura() {
 	try {
-		console.log('ruta segura');
+		//verificar que los usuarios han iniciado sesion
 		let persona: any = localStorage.getItem('usuario');
 		let token: any = localStorage.getItem('token');
 

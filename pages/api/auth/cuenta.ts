@@ -4,7 +4,6 @@ import { enviarEmail, htmlCodigodeSeguridad, htmlInisiarSesion } from '../../../
 import { Persona } from '../../../util/persona';
 import { respuesta } from '../../../util/respuesta';
 import bcrypt from 'bcrypt';
-import { exit } from 'process';
 import { generarToken } from '../../../util/jwt';
 
 export default async function cuentas(req: NextApiRequest, res: NextApiResponse) {
@@ -17,6 +16,7 @@ export default async function cuentas(req: NextApiRequest, res: NextApiResponse)
 	}
 }
 
+// generar codigo de seguridad
 async function PUT(req: NextApiRequest, res: NextApiResponse) {
 	let respuesta: respuesta = { code: 200, mensaje: 'Todo ha salido bien' };
 	let persona: Persona = req.body;
@@ -29,6 +29,7 @@ async function PUT(req: NextApiRequest, res: NextApiResponse) {
 		if (salt) {
 			bcrypt.hash(`${codigo}`, salt, (err, hash) => {
 				if (!err) {
+					//guardar contraseña en la base de datos
 					actualizarUsuario(res, persona, `${codigo}`, hash);
 				}
 
@@ -43,6 +44,7 @@ async function PUT(req: NextApiRequest, res: NextApiResponse) {
 	});
 }
 
+// validar el codigo para inicias sesion
 async function POST(req: NextApiRequest, res: NextApiResponse) {
 	let respuesta: respuesta = { code: 200, mensaje: 'Todo salio bien' };
 	let persona: Persona = req.body;
@@ -117,6 +119,7 @@ function validarPersona(persona: Persona) {
 	return false;
 }
 
+//validar que el codigo de seguridad es correcto
 async function validarPassword(persona: Persona, personadb: Persona, res: NextApiResponse) {
 	let respuesta: respuesta = { code: 200, mensaje: 'Usuario valido' };
 

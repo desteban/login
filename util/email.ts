@@ -1,6 +1,7 @@
 import nodemailer from 'nodemailer';
 import { Persona } from './persona';
 
+// configuracion para enviar correos
 export async function enviarEmail(email: string, asunto: string, texto: any) {
 	try {
 		let testAccount = await nodemailer.createTestAccount();
@@ -29,6 +30,7 @@ export async function enviarEmail(email: string, asunto: string, texto: any) {
 	}
 }
 
+// html de contenido de los correos (plantilla de contenido para email)
 export async function htmlBIENBENIDA(nombre: string, link: string) {
 	let html = `<div style="color: #2b2c34">
 	<div

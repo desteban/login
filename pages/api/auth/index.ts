@@ -22,12 +22,14 @@ export default async function auth(req: NextApiRequest, res: NextApiResponse) {
 	}
 }
 
+//crear los usuarios
 async function POST(req: NextApiRequest, res: NextApiResponse) {
 	let respuesta: respuesta = {
 		code: 400,
 		mensaje: 'Algunos campos no cumplen con un formato valido o están vacíos'
 	};
 
+	//tomar datos
 	let persona: Persona = req.body;
 
 	persona.fecha_creacion = new Date();
@@ -41,6 +43,7 @@ async function POST(req: NextApiRequest, res: NextApiResponse) {
 		try {
 			persona = UpperCase(persona);
 
+			//guardar la persona en la base de datos
 			await db.query(AgregarUsuario, [
 				persona.nombre,
 				persona.apellido,
@@ -92,6 +95,7 @@ function errorCrearUsuario(error: any): respuesta {
 	return { code: 400, mensaje: 'Algo salió mal, por favor verifica la información' };
 }
 
+// verificar los usuarios
 async function PUT(req: NextApiRequest, res: NextApiResponse) {
 	let respuesta: respuesta = { code: 200, mensaje: 'Usuario verificado' };
 

@@ -25,12 +25,12 @@ const terminos: NextPage = () => {
 					<h2>Declaración de Privacidad</h2>
 
 					<p>
-						El portal Il Ristorente es una instancia comprometida con los usuarios que
-						además de proveer información, vela por su calidad y fidelidad. Para ello
-						institucionalizó la Declaración de Privacidad, la cual determina y garantiza
-						el debido proceso para utilizar información personal y privada de personas
-						inscritas en el portal para no infligir de ninguna manera las disposiciones
-						contenidas en la Ley Estatutaria del Habeas Data{' '}
+						El portal sociallsdservises es una instancia comprometida con los usuarios
+						que además de proveer información, vela por su calidad y fidelidad. Para
+						ello institucionalizó la Declaración de Privacidad, la cual determina y
+						garantiza el debido proceso para utilizar información personal y privada de
+						personas inscritas en el portal para no infligir de ninguna manera las
+						disposiciones contenidas en la Ley Estatutaria del Habeas Data{' '}
 						<Link href="https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=49981">
 							<a className="enlace" target="_blank">
 								(Ley 1581 del 2012)
@@ -50,8 +50,8 @@ const terminos: NextPage = () => {
 				<div>
 					<h2>Recolección de información personal</h2>
 					<p>
-						El portal de Il Ristorante recolecta información personal de sus usuarios
-						para garantizar algunas de sus actividades. Los datos que con mayor
+						El portal de sociallsdservises recolecta información personal de sus
+						usuarios para garantizar algunas de sus actividades. Los datos que con mayor
 						frecuencia se solicitan son: nombre, identificación, dirección de correo
 						electrónico, dirección de residencia, número telefónico, edad, género,
 						formación académica, producción académica y científica, preferencias e
@@ -71,7 +71,7 @@ const terminos: NextPage = () => {
 					<ol>
 						<li>
 							Por el hecho de ingresar al Portal y para garantizar el buen y adecuado
-							uso de este, el Usuario reconoce en cabeza de Il Ristorante:
+							uso de este, el Usuario reconoce en cabeza de sociallsdservises:
 							<ul>
 								<li>
 									El derecho de modificar en cualquier tiempo y por cualquier
@@ -94,7 +94,7 @@ const terminos: NextPage = () => {
 
 						<li>
 							El Portal, contiene links que remiten a otras páginas de Internet.
-							Teniendo en cuenta que Il Ristorante no es responsable por la
+							Teniendo en cuenta que sociallsdservises no es responsable por la
 							disponibilidad de dichos sitios, el Usuario deberá dirigirse
 							directamente al administrador de dicho sitio cuando así lo requiera y
 							usar dichos sitios de acuerdo con los términos de uso respectivos.
@@ -103,7 +103,7 @@ const terminos: NextPage = () => {
 						<li>
 							El registro al Portal web podrá darse por terminado por el Usuario en
 							cualquier momento enviando un correo electrónico a
-							atencionalciudadano@Il Ristorante.gov.co
+							atencionalciudadano@sociallsdservises.gov.co
 						</li>
 
 						<li>
@@ -112,24 +112,24 @@ const terminos: NextPage = () => {
 						</li>
 
 						<li>
-							Il Ristorante no garantiza la disponibilidad y continuidad del
+							sociallsdservises no garantiza la disponibilidad y continuidad del
 							funcionamiento del Portal. Cuando ello sea razonablemente posible, Il
 							Ristorante advertirá previamente las interrupciones en el funcionamiento
 							del Portal, cuando fueren previsibles o hubieren sido dispuestos por la
-							entidad. Il Ristorante tampoco garantiza la utilidad del Portal para la
-							realización de ninguna actividad en particular, ni su infalibilidad y,
-							en particular, aunque no de modo exclusivo, que los Usuarios puedan
+							entidad. sociallsdservises tampoco garantiza la utilidad del Portal para
+							la realización de ninguna actividad en particular, ni su infalibilidad
+							y, en particular, aunque no de modo exclusivo, que los Usuarios puedan
 							efectivamente utilizar el Portal, acceder a las distintas páginas web o
 							secciones que forman el Portal.
 						</li>
 
 						<li>
-							Il Ristorante no incurrirá en responsabilidad con el usuario o terceros,
-							cuando su sitio WEB no se encuentre disponible.
+							sociallsdservises no incurrirá en responsabilidad con el usuario o
+							terceros, cuando su sitio WEB no se encuentre disponible.
 						</li>
 
 						<li>
-							Il Ristorante excluye cualquier responsabilidad por los daños y
+							sociallsdservises excluye cualquier responsabilidad por los daños y
 							perjuicios de toda naturaleza que puedan deberse a la falta de
 							disponibilidad o de continuidad del funcionamiento del Portal, a la
 							defraudación de la utilidad que los Usuarios hubieren podido atribuir al
@@ -139,7 +139,7 @@ const terminos: NextPage = () => {
 						</li>
 
 						<li>
-							Il Ristorante no controla ni garantiza, y por lo tanto no se hace
+							sociallsdservises no controla ni garantiza, y por lo tanto no se hace
 							responsable por, la ausencia de virus ni de otros elementos en los
 							contenidos del Portal que puedan producir alteraciones en el sistema
 							informático (software y hardware) del Usuario o en los documentos
@@ -148,9 +148,9 @@ const terminos: NextPage = () => {
 						</li>
 
 						<li>
-							Es interés de Il Ristorante ser un espacio para el desarrollo de la
+							Es interés de sociallsdservises ser un espacio para el desarrollo de la
 							ciencia y el trabajo con contenido de actualidad y de interés para los
-							Usuarios. No obstante, Il Ristorante no puede garantizar que dicho
+							Usuarios. No obstante, sociallsdservises no puede garantizar que dicho
 							contenido esté exento de errores o imprecisiones, en cuyo caso podrán
 							solicitarse las aclaraciones o correcciones que sean del caso. Il
 							Ristorante tampoco puede garantizar que el contenido del Portal sea
@@ -158,7 +158,7 @@ const terminos: NextPage = () => {
 						</li>
 
 						<li>
-							Il Ristorante no garantiza y por lo tanto no es responsable de, la
+							sociallsdservises no garantiza y por lo tanto no es responsable de, la
 							licitud, fiabilidad, exactitud, exhaustividad, actualidad y utilidad de
 							las columnas de opinión, y/o las opiniones e informaciones registradas
 							por los Usuarios en el Portal.

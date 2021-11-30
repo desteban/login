@@ -10,6 +10,7 @@ export let db = mysql({
 	}
 });
 
+// script SQL
 export const AgregarUsuario: string =
 	'INSERT INTO usuarios(nombre, apellido, email, fecha_creacion, fecha_actualizacion, token) VALUES (?, ?, ?, ?, ?, ?);';
 

@@ -29,6 +29,10 @@ CREATE TABLE IF NOT EXISTS usuarios_log(
 	FOREIGN KEY (id_evento) REFERENCES eventos(id_evento)
 );
 
+
+/*
+	Realizar un log al momento de registrar un usuario
+*/
 DELIMITER $$
 CREATE TRIGGER `registro` AFTER INSERT ON usuarios
 FOR EACH ROW BEGIN
@@ -38,6 +42,10 @@ END
 $$
 DELIMITER ; 
 
+/*
+	Valida que los usuarios estan verificados para ingresar a la aplicacion,
+	ademas de modificar el token del usuario
+*/
 DELIMITER $$
 CREATE PROCEDURE verificacion(IN _token TEXT, _fecha DATETIME)
 BEGIN
@@ -53,7 +61,9 @@ BEGIN
 END $$
 DELIMITER ;
 
-
+/*
+	VAlida que los usuarios solo se puedan verifiacr una sola vez
+*/
 DELIMITER $$
 CREATE TRIGGER validarVerifiacion BEFORE INSERT ON usuarios_log
 FOR EACH ROW
@@ -68,6 +78,10 @@ BEGIN
 END $$
 DELIMITER ;
 
+
+/*
+	actualiza la contraseña del usuario y hace el log de pedir codigo
+*/
 DELIMITER $$
 CREATE PROCEDURE codigoSeguridad (IN _codigo TEXT, IN _email VARCHAR(50), IN _fecha DATETIME)
 BEGIN
@@ -83,6 +97,10 @@ BEGIN
 END $$
 DELIMITER ;
 
+
+/*
+	al iniciar sesion elimina la constraseña del usuario y hace el log de iniciar sesion
+*/
 DELIMITER $$
 CREATE PROCEDURE cambiarToken (IN _token TEXT, IN _id INTEGER, IN _fecha DATETIME)
 BEGIN
