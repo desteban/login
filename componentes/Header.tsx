@@ -3,6 +3,8 @@ import { Component } from 'react';
 import Link from 'next/link';
 import { Persona } from '../util/persona';
 import cerrarSesion from '../util/CerrarSesion';
+import Image from 'next/image';
+import Logo from '../public/logo.svg';
 
 interface Istate {
 	tema?: boolean;
@@ -71,7 +73,7 @@ export default class Header extends Component<any, Istate> {
 
 				<div className="logo">
 					<Link href="/">
-						<a>Logo</a>
+						<a>LSD</a>
 					</Link>
 				</div>
 
